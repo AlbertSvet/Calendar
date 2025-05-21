@@ -4,7 +4,7 @@ import { useState, useEffect, memo} from "react";
 import dayjs from "dayjs";
 interface IList {
 	list: IAppoint,
-	handleOpenModal: (id:number)=>void
+	handleOpenModal?: (id:number)=>void
 }
 
 
@@ -35,7 +35,7 @@ const AppointmentItem = memo(({list,handleOpenModal}:IList) => {
 				<span>Time left:</span>
 				<span className="appointment__timer">{timeLeft}</span>
 			</div>
-			<button className="appointment__cancel" onClick={()=>{handleOpenModal(id)}}>Cancel</button>
+			<button className="appointment__cancel" onClick={()=>{handleOpenModal?.(id)}}>Cancel</button>
 
 			
 		</div>

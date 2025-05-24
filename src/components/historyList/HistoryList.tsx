@@ -3,11 +3,10 @@ import { AppointmentContext } from "../../context/appoint/AppointContext";
 import { useEffect, useContext } from "react";
 
 function HistoryList() {
-	const {IAppoint, getAppoint} = useContext(AppointmentContext)
+	const {IAppoint, getAppoint, Calendar} = useContext(AppointmentContext)
 	useEffect(()=>{
 		getAppoint()
-		console.log(IAppoint)
-	},[])
+	},[Calendar])
 	return (
 		<>
 			{IAppoint.map(item =>{

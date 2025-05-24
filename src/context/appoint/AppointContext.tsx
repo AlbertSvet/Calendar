@@ -45,14 +45,23 @@ export const AppointmentContextProvider = ({children}: ProviderInter) =>{
         Calendar : state.Calendar,
         getAppoint: () =>{
             getAllAppoint().then( data => {
-                dispatch({type: ActionTypes.SET_ALL_APPOINTMETS, paylode: data})
+                    const filterData = data.filter((item)=>{
+                    if(Array.isArray(state.Calendar) && state.Calendar[0] && state.Calendar[1]){
+                        if(new Date(item.date).getTime() >= new Date(state.Calendar[0]).getTime() && new Date(item.date).getTime() <= new Date(state.Calendar[1]).getTime()){
+                            return item
+                        }
+                    }else{
+                        return item
+                    }
+                })
+                dispatch({type: ActionTypes.SET_ALL_APPOINTMETS, paylode: filterData})
                 })
         },
         getCancelAppoint: () =>{
             canceledTrue().then(data =>{
                   const filterData = data.filter((item)=>{
                     if(Array.isArray(state.Calendar) && state.Calendar[0] && state.Calendar[1]){
-                        if(new Date(item.date).getTime >= new Date(state.Calendar[0]).getTime && new Date(item.date).getTime <= new Date(state.Calendar[1]).getTime){
+                        if(new Date(item.date).getTime() >= new Date(state.Calendar[0]).getTime() && new Date(item.date).getTime() <= new Date(state.Calendar[1]).getTime()){
                             return item
                         }
                     }else{
